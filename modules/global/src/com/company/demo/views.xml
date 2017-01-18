@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.company.demo.entity.Project"
+          extends="_local"
+          name="project-with-tasks">
+        <property name="tasks"
+                  view="task-with-workers"/>
+    </view>
+    <view class="com.company.demo.entity.Task"
+          extends="_local"
+          name="task-full">
+        <property name="workers"
+                  view="_minimal"/>
+        <property name="project"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.demo.entity.TimeEntry"
+          extends="_local"
+          name="timeEntry-full">
+        <property name="task"
+                  view="task-with-workers">
+        </property>
+        <property name="worker"
+                  view="_minimal"/>
+        <property name="project"
+                  view="project-with-tasks">
+        </property>
+    </view>
+    <view class="com.company.demo.entity.Task"
+          extends="_local"
+          name="task-with-workers">
+        <property name="workers"
+                  view="_minimal"/>
+    </view>
+</views>

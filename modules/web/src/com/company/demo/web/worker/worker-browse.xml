@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.demo.web.worker.WorkerBrowse"
+        focusComponent="workersTable"
+        lookupComponent="workersTable"
+        messagesPack="com.company.demo.web.worker">
+    <dsContext>
+        <collectionDatasource id="workersDs"
+                              class="com.company.demo.entity.Worker"
+                              view="_local">
+            <query>
+                <![CDATA[select e from demo$Worker e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="workersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="workersTable"
+                datasource="workersDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="workersTable"
+               width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rows datasource="workersDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="workersTable.create"/>
+                <button id="editBtn"
+                        action="workersTable.edit"/>
+                <button id="removeBtn"
+                        action="workersTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

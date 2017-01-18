@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.demo.web.timeentry.TimeEntryBrowse"
+        focusComponent="timeEntriesTable"
+        lookupComponent="timeEntriesTable"
+        messagesPack="com.company.demo.web.timeentry">
+    <dsContext>
+        <collectionDatasource id="timeEntriesDs"
+                              class="com.company.demo.entity.TimeEntry"
+                              view="timeEntry-full">
+            <query>
+                <![CDATA[select e from demo$TimeEntry e]]>
+            </query>
+        </collectionDatasource>
+
+        <collectionDatasource id="projectsDs"
+                              class="com.company.demo.entity.Project"
+                              view="project-with-tasks">
+            <query>
+                <![CDATA[select e from demo$Project e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="timeEntriesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="timeEntriesTable"
+                datasource="timeEntriesDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="timeEntriesTable"
+               editable="true"
+               width="100%">
+            <actions>
+                <action id="create"
+                        caption="Create"
+                        icon="icons/plus-btn.png"
+                        invoke="createTimeEntry"/>
+                <action id="remove"/>
+                <action id="save"
+                        caption="Save All"
+                        icon="icons/save.png"
+                        invoke="saveTimeEntries"/>
+            </actions>
+            <columns>
+                <column id="project"
+                        editable="true"
+                        optionsDatasource="projectsDs" />
+                <column id="task"/>
+                <column id="worker"/>
+                <column id="hours"
+                        editable="true"/>
+            </columns>
+            <rows datasource="timeEntriesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="timeEntriesTable.create"/>
+                <button id="removeBtn"
+                        action="timeEntriesTable.remove"/>
+                <button id="saveBtn"
+                        action="timeEntriesTable.save"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editCaption"
+        class="com.company.demo.web.project.ProjectEdit"
+        datasource="projectDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.demo.web.project">
+    <dsContext>
+        <datasource id="projectDs"
+                    class="com.company.demo.entity.Project"
+                    view="project-with-tasks">
+            <collectionDatasource id="tasksDs"
+                                  property="tasks"/>
+        </datasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="projectDs">
+            <column width="250px">
+                <field id="name"/>
+            </column>
+        </fieldGroup>
+        <groupBox id="tasksBox"
+                  caption="msg://com.company.demo.entity/Project.tasks">
+            <table id="tasksTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="name"/>
+                </columns>
+                <rows datasource="tasksDs"/>
+                <buttonsPanel>
+                    <button action="tasksTable.create"/>
+                    <button action="tasksTable.edit"/>
+                    <button action="tasksTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>
